@@ -23,6 +23,8 @@ COPY --from=go_builder /app/proxy_app /app/proxy_app
 
 COPY ./scripts/entrypoint.sh /app/
 
+EXPOSE 3031 5001 8080
+
 RUN chmod +x /app/entrypoint.sh
 
 ENTRYPOINT ["/app/entrypoint.sh"]

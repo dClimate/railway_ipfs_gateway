@@ -25,12 +25,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	_, apiKeyEnvVariableExists := os.LookupEnv("API_KEY")
-	if !apiKeyEnvVariableExists {
-		fmt.Println("Error: API_KEY environment variable not set")
-		os.Exit(1)
-	}
-
 	router := chi.NewRouter()
 	router.Use(middleware.Logger)
 	router.Use(middleware.RealIP, middleware.Recoverer, middleware.RedirectSlashes, middleware.RequestID, middleware.CleanPath)
@@ -61,14 +55,6 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 	// if no auth header is set or auth header is empty, return unauthorized
 	if authHeader == "" {
-		w.WriteHeader(http.StatusUnauthorized)
-		_, _ = w.Write([]byte("Unauthorized"))
-		return
-	}
-
-	API_KEY, _ := os.LookupEnv("API_KEY")
-
-	if authHeader != API_KEY {
 		w.WriteHeader(http.StatusUnauthorized)
 		_, _ = w.Write([]byte("Unauthorized"))
 		return

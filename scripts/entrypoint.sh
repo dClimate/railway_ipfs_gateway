@@ -8,21 +8,22 @@ ALLOW_ORIGINS="${ALLOW_ORIGINS:?ALLOW_ORIGINS is required}"
 
 echo "Starting IPFS Gateway..."
 ipfs init
+ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
+ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
+
 ipfs daemon &
 sleep 5
 
 echo "Connecting to dClimate's IPFS nodes..."
-ipfs swarm connect "/ip4/15.235.14.184/tcp/4001/p2p/12D3KooWT32PiwLWNhC5nRmhqiJTTJycopo3bxYpCSLr6TCHSn1Q"
-ipfs swarm connect "/ip4/15.235.86.198/tcp/4001/p2p/12D3KooWCKaGcTgY23i2frcH4ZiNF5tcAZ33u4ZNruhkrtpPhd6L"
-ipfs swarm connect "/ip4/148.113.168.50/tcp/4001/p2p/12D3KooWGi5NzUFEsg6gwLwzX2Kvg9QZ88ug1J8sJr6nVhqBC64b"
+ipfs swarm connect "/ip4/15.235.14.184/udp/4001/quic-v1/p2p/12D3KooWHdZM98wcuyGorE184exFrPEJWv2btXWWSHLQaqwZXuPe"
+ipfs swarm connect "/ip4/15.235.86.198/udp/4001/quic-v1/p2p/12D3KooWGX5HDDjbdiJL2QYf2f7Kjp1Bj6QAXR5vFvLQniTKwoBR"
+ipfs swarm connect "/ip4/148.113.168.50/udp/4001/quic-v1/p2p/12D3KooWPwXW1tXzHoHgMofDwc9uzi7PLVHZt7QbLNt2v3pxzoEF"
 
 echo "Connected to dClimate's IPFS nodes!"
 
 ipfs config Swarm.ConnMgr.Type "none"
 ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin "[\"${ALLOW_ORIGINS}\"]"
 ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods "[\"HEAD\", \"GET\", \"OPTIONS\"]"
-ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
-ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
 
 echo "Current IPFS configuration:"
 ipfs config show

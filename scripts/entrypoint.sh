@@ -7,7 +7,7 @@ ALLOW_ORIGINS="${ALLOW_ORIGINS:?ALLOW_ORIGINS is required}"
 [ -z "${ALLOW_ORIGINS}" ] && echo "ALLOW_ORIGINS is required" && exit 1
 
 echo "Starting IPFS Gateway..."
-ipfs init
+ipfs init --profile server
 ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
 ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
 

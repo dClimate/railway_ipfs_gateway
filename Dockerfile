@@ -2,8 +2,7 @@
 FROM ubuntu:22.04
 
 # Set environment variables
-ENV IPFS_GATEWAY_HOST=http://127.0.0.1:8080
-ENV ALLOW_ORIGINS=
+ENV ALLOW_ORIGINS=*
 
 # Install dependencies
 RUN apt-get update && \
@@ -27,7 +26,7 @@ COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
 # Expose IPFS API and Gateway ports
-EXPOSE 5001 8080
+EXPOSE 8080
 
 # Entry point
 ENTRYPOINT ["/app/entrypoint.sh"]

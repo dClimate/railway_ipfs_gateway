@@ -28,14 +28,12 @@ docker build -t dclimate/ipfs-gateway .
 ```bash
 docker run -d \
     -e ALLOW_ORIGINS="*" \
-    -e IPFS_GATEWAY_HOST="http://127.0.0.1:8080" \
-    -p 8080:8080 -p 5001:5001 \
+    -p 8080:8080 \
     dclimate/ipfs-gateway
 ```
 
 ### Environment Variables
 
--   `IPFS_GATEWAY_HOST` (default: http://127.0.0.1:8080): Sets the IPFS Gateway host.
 -   `ALLOW_ORIGINS` (required): Specifies CORS origins as a JSON array. Example: "\*" or "[\"http://example.com\"]".
 
 ## License

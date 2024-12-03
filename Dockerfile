@@ -1,9 +1,6 @@
 # Base image
 FROM ubuntu:22.04
 
-# Set environment variables
-ENV ALLOW_ORIGINS=*
-
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y \
